@@ -1,0 +1,685 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 33%, #fef3c7 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #374151;
+}
+
+/* Floating decorative elements */
+.floating-decor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart, .sparkle {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.heart-1 {
+    top: 5rem;
+    left: 2.5rem;
+    color: #f43f5e;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    top: 10rem;
+    right: 5rem;
+    color: #ec4899;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.heart-2 {
+    bottom: 10rem;
+    left: 5rem;
+    color: #f59e0b;
+    font-size: 2.5rem;
+    animation: pulse 2s ease-in-out infinite 1s;
+}
+
+.sparkle-2 {
+    bottom: 5rem;
+    right: 2.5rem;
+    color: #f43f5e;
+    animation: bounce 2s ease-in-out infinite 2s;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.main-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #dc2626 0%, #ec4899 50%, #f59e0b 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+.heart-icon {
+    font-size: 2rem;
+    color: #f43f5e;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* Main content */
+.main-content {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Card styles */
+.anniversary-card, .upload-card, .photo-grid-card, .empty-state-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+.anniversary-card {
+    text-align: center;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.card-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.card-description {
+    font-size: 1.125rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+/* Buttons */
+.primary-btn {
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.3);
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 15px 35px -5px rgba(244, 63, 94, 0.4);
+}
+
+.primary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: #f43f5e;
+    border: 2px solid #f43f5e;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background: #fdf2f8;
+}
+
+.btn-icon {
+    font-size: 1.25rem;
+}
+
+.photo-counter {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* Upload section */
+.upload-header {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.upload-header h3 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.upload-description {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.add-photo-section {
+    text-align: center;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.file-upload-area {
+    position: relative;
+    border: 2px dashed #f43f5e;
+    border-radius: 0.75rem;
+    padding: 3rem 1rem;
+    text-align: center;
+    background: #fdf2f8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+    background: #fce7f3;
+    border-color: #ec4899;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    color: #f43f5e;
+    margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+    font-size: 0.75rem;
+    color: #f43f5e;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 0.5rem;
+    object-fit: contain;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.field-group label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.field-group input,
+.field-group textarea {
+    padding: 0.75rem;
+    border: 2px solid #f3f4f6;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+    outline: none;
+    border-color: #f43f5e;
+}
+
+.field-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Photo grid */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.photo-item {
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-more {
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #fce7f3, #fdf2f8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.1);
+}
+
+.photo-more-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f43f5e;
+}
+
+.photo-more-text {
+    font-size: 0.75rem;
+    color: #f43f5e;
+}
+
+/* Empty state */
+.empty-state-card {
+    text-align: center;
+    color: #6b7280;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Slideshow modal */
+.slideshow-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slideshow-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 70;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.close-btn {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.slideshow-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem 2rem;
+}
+
+.nav-btn {
+    position: absolute;
+    z-index: 60;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.prev-btn {
+    left: 2rem;
+}
+
+.next-btn {
+    right: 2rem;
+}
+
+.photo-container {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.slideshow-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 70vh;
+    transition: opacity 0.5s ease;
+}
+
+.photo-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem;
+}
+
+.photo-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.heart-small {
+    color: #f43f5e;
+}
+
+.photo-title h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.photo-date {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.photo-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Navigation dots */
+.navigation-dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background: white;
+    transform: scale(1.25);
+}
+
+.nav-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.photo-counter-slideshow {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 2000;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3);
+    font-weight: 500;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .main-content {
+        max-width: 100%;
+    }
+    
+    .anniversary-card, .upload-card, .photo-grid-card, .empty-state-card {
+        padding: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 2rem;
+    }
+    
+    .slideshow-container {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .nav-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+    
+    .prev-btn {
+        left: 1rem;
+    }
+    
+    .next-btn {
+        right: 1rem;
+    }
+    
+    .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+.photo-item.selected {
+    border: 2px solid #f43f5e;
+    transform: scale(1.05);
+}

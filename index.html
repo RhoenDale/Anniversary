@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary - Our Love Story</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating decorative elements -->
+    <div class="floating-decor">
+        <div class="heart heart-1">♥</div>
+        <div class="sparkle sparkle-1">✨</div>
+        <div class="heart heart-2">♥</div>
+        <div class="sparkle sparkle-2">✨</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="title-container">
+                <span class="heart-icon">♥</span>
+                <h1 class="main-title">Happy Anniversary</h1>
+                <span class="heart-icon">♥</span>
+            </div>
+            <p class="subtitle">Our beautiful moments together ✨</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Anniversary Card -->
+            <div class="anniversary-card">
+                <div class="card-header">
+                    <div class="card-icon">♥</div>
+                    <h2 class="card-title">Our Love Story</h2>
+                    <div class="card-icon">♥</div>
+                </div>
+                
+                <p class="card-description">
+                    Every photo tells our story, every memory makes us stronger. 
+                    Click below to relive our most precious moments together.
+                </p>
+
+                <div class="card-actions">
+                    <button id="viewMemoriesBtn" class="primary-btn">
+                        <span class="btn-icon">📷</span>
+                        View Our Memories
+                        <span class="btn-icon">✨</span>
+                    </button>
+                </div>
+
+                <div class="photo-counter">
+                    <span id="photoCount">0</span> beautiful memories stored
+                </div>
+            </div>
+
+            <!-- Photo Upload Section -->
+            <div class="upload-card">
+                <div class="upload-header">
+                    <span class="heart-icon">♥</span>
+                    <h3>Add New Memory</h3>
+                    <span class="heart-icon">♥</span>
+                </div>
+                <p class="upload-description">Upload a special moment to our collection</p>
+
+                <div id="uploadForm" class="upload-form hidden">
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📁</div>
+                            <p><strong>Click to upload</strong> or drag and drop</p>
+                            <p class="upload-hint">PNG, JPG, JPEG, GIF (MAX. 10MB)</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <img id="previewImage" class="preview-image hidden" alt="Preview">
+                    </div>
+
+                    <div class="form-fields">
+                        <div class="field-group">
+                            <label for="titleInput">Memory Title</label>
+                            <input type="text" id="titleInput" placeholder="Our beautiful day at the beach...">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="dateInput">Date</label>
+                            <input type="date" id="dateInput">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="descriptionInput">Description</label>
+                            <textarea id="descriptionInput" placeholder="Tell me about this special moment..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+                            <button type="button" class="primary-btn" id="addMemoryBtn" disabled>Add Memory</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addPhotoSection" class="add-photo-section">
+                    <button class="primary-btn" id="showUploadBtn">
+                        <span class="btn-icon">+</span>
+                        Add Photo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Photo Grid Preview -->
+            <div id="photoGrid" class="photo-grid-card">
+                <h3>Our Photo Collection</h3>
+                <div id="photoGridContainer" class="photo-grid">
+                    <!-- Photos will be inserted here -->
+                </div>
+                <div class="grid-actions">
+                    <button id="selectModeBtn" class="secondary-btn">Select Photos</button>
+                    <div id="selectionActions" class="selection-actions hidden">
+                        <button id="deleteSelectedBtn" class="delete-btn-confirm">Delete Selected</button>
+                        <button id="cancelSelectionBtn" class="secondary-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state-card">
+                <div class="empty-icon">📷</div>
+                <h3>No memories yet</h3>
+                <p>Start building your photo collection by uploading your first memory above!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slideshow Modal -->
+    <div id="slideshowModal" class="slideshow-modal hidden">
+        <div class="slideshow-overlay">
+            <!-- Controls -->
+            <div class="slideshow-controls">
+                <div class="left-controls">
+                    <button id="autoPlayBtn" class="control-btn">Auto Play</button>
+                    <button id="editPhotoBtn" class="control-btn">✏️ Edit</button>
+                    <button id="deletePhotoBtn" class="control-btn delete-btn">🗑️ Delete</button>
+                </div>
+                <button id="closeBtn" class="control-btn close-btn">✕</button>
+            </div>
+
+            <!-- Main slideshow -->
+            <div class="slideshow-container">
+                <button id="prevBtn" class="nav-btn prev-btn">‹</button>
+                
+                <div class="photo-container">
+                    <img id="currentPhoto" class="slideshow-photo" alt="Current memory">
+                    <div class="photo-info">
+                        <div class="photo-title">
+                            <span class="heart-small">♥</span>
+                            <h3 id="photoTitle"></h3>
+                        </div>
+                        <p id="photoDate" class="photo-date"></p>
+                        <p id="photoDescription" class="photo-description"></p>
+                    </div>
+                </div>
+                
+                <button id="nextBtn" class="nav-btn next-btn">›</button>
+            </div>
+
+            <!-- Navigation dots -->
+            <div id="navigationDots" class="navigation-dots">
+                <!-- Dots will be inserted here -->
+            </div>
+
+            <!-- Photo counter -->
+            <div class="photo-counter-slideshow">
+                <span id="currentPhotoIndex">1</span> of <span id="totalPhotos">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast hidden">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div id="deleteModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Delete Photo</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this photo? This action cannot be undone.</p>
+                <div class="photo-preview-delete">
+                    <img id="deletePhotoPreview" alt="Photo to delete">
+                    <div class="delete-photo-info">
+                        <h4 id="deletePhotoTitle"></h4>
+                        <p id="deletePhotoDate"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="secondary-btn">Cancel</button>
+                <button id="confirmDeleteBtn" class="delete-btn-confirm">Delete Photo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit photo modal -->
+    <div id="editModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Photo Details</h3>
+            </div>
+            <div class="modal-body">
+                <div class="photo-preview-edit">
+                    <img id="editPhotoPreview" alt="Photo to edit">
+                </div>
+                <div class="edit-form">
+                    <div class="field-group">
+                        <label for="editTitleInput">Title</label>
+                        <input type="text" id="editTitleInput" placeholder="Photo title">
+                    </div>
+                    <div class="field-group">
+                        <label for="editDateInput">Date</label>
+                        <input type="date" id="editDateInput">
+                    </div>
+                    <div class="field-group">
+                        <label for="editDescriptionInput">Description</label>
+                        <textarea id="editDescriptionInput" placeholder="Photo description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="cancelEditBtn" class="secondary-btn">Cancel</button>
+                <button id="saveEditBtn" class="primary-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
